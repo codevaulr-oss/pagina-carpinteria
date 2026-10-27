@@ -1,0 +1,33 @@
+---
+const navLinks = [
+  { name: 'Inicio', href: '#inicio' },
+  { name: 'Galería', href: '#galeria' },
+  { name: 'Cotizador', href: '#cotizador' },
+];
+---
+
+<header class="fixed w-full top-0 z-50 bg-stone-900/90 backdrop-blur-md border-b border-amber-900/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <a href="#inicio" class="text-2xl font-extrabold tracking-wider text-amber-500 uppercase flex items-center gap-2">
+      <span>🪵</span> Muebles Rústicos
+    </a>
+    
+    <nav class="hidden md:flex space-x-8">
+      {navLinks.map(link => (
+        <a 
+          href={link.href} 
+          class="text-stone-300 hover:text-amber-500 font-semibold transition-colors text-sm tracking-wide"
+        >
+          {link.name}
+        </a>
+      ))}
+    </nav>
+
+    <a 
+      href="#cotizador" 
+      class="bg-amber-700 hover:bg-amber-600 text-white font-bold px-5 py-2.5 rounded-lg transition-all text-sm shadow-md"
+    >
+      Cotizar
+    </a>
+  </div>
+</header>

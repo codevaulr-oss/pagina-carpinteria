@@ -1,0 +1,53 @@
+---
+const projects = [
+  {
+    title: "Comedor Rústico Roble",
+    category: "Comedores",
+    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80",
+    description: "Mesa de 8 sillas en madera sólida con acabado artesanal."
+  },
+  {
+    title: "Cocina Integral Campestre",
+    category: "Cocinas",
+    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+    description: "Gabinetes en madera rústica con barra desayunadora."
+  },
+  {
+    title: "Cabecera y Buroes King Size",
+    category: "Recámaras",
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+    description: "Diseño ensamblado a mano con vetas naturales expuestas."
+  }
+];
+---
+
+<section id="galeria" class="py-24 bg-stone-900 border-t border-stone-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="text-amber-500 font-bold uppercase tracking-widest text-xs">Catálogo de Proyectos</span>
+      <h2 class="text-3xl sm:text-5xl font-black text-stone-100 mt-2">Trabajos Recientes</h2>
+      <p class="text-stone-400 mt-4 max-w-xl mx-auto">Piezas fabricadas bajo las dimensiones y necesidades exactas del cliente.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {projects.map(item => (
+        <div class="bg-stone-800 rounded-2xl overflow-hidden border border-stone-700/60 shadow-xl group hover:border-amber-600/50 transition-all">
+          <div class="relative overflow-hidden h-64">
+            <img 
+              src={item.image} 
+              alt={item.title} 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-4 right-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs px-3 py-1 rounded-full font-semibold border border-amber-500/20">
+              {item.category}
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-stone-100 mb-2">{item.title}</h3>
+            <p class="text-stone-400 text-sm">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

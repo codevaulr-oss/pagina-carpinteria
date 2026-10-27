@@ -1,0 +1,68 @@
+---
+const phoneNumber = "525500000000"; 
+---
+
+<section id="cotizador" class="py-24 bg-stone-950 border-t border-stone-800">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-stone-900 p-8 sm:p-12 rounded-3xl border border-amber-900/40 shadow-2xl">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-stone-100">Cotizador Rápido de Muebles</h2>
+        <p class="text-stone-400 text-sm mt-2">Selecciona las opciones para enviar tu solicitud directamente al taller.</p>
+      </div>
+
+      <form id="quoteForm" class="space-y-6">
+        <div>
+          <label class="block text-stone-300 font-semibold text-sm mb-2">Tipo de Mueble</label>
+          <select id="furnitureType" class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500">
+            <option value="Comedor / Mesa">Comedor / Mesa</option>
+            <option value="Cocina Integral">Cocina Integral</option>
+            <option value="Recámara / Buroes">Recámara / Buroes</option>
+            <option value="Closet / Mueble de guardado">Closet / Mueble de guardado</option>
+            <option value="Otro proyecto a medida">Otro proyecto a medida</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-stone-300 font-semibold text-sm mb-2">Acabado / Tono de Madera Preferido</label>
+          <select id="woodFinish" class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500">
+            <option value="Rústico Natural (Cera/Laca Mate)">Rústico Natural (Cera/Laca Mate)</option>
+            <option value="Nogal Oscuro">Nogal Oscuro</option>
+            <option value="Tono Olmo / Chocolate">Tono Olmo / Chocolate</option>
+            <option value="Estilo Industrial (Madera + Hierro)">Estilo Industrial (Madera + Hierro)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-stone-300 font-semibold text-sm mb-2">Medidas Aproximadas o Detalles</label>
+          <textarea 
+            id="details" 
+            rows="3" 
+            placeholder="Ej: Mesa para 6 personas de 180cm x 90cm..." 
+            class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500"
+          ></textarea>
+        </div>
+
+        <button 
+          type="button" 
+          id="sendBtn"
+          class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>Cotizar por WhatsApp</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ phoneNumber }}>
+  document.getElementById('sendBtn')?.addEventListener('click', () => {
+    const furniture = document.getElementById('furnitureType').value;
+    const finish = document.getElementById('woodFinish').value;
+    const details = document.getElementById('details').value;
+
+    const message = `¡Hola! Me gustaría cotizar un mueble con las siguientes características:\n\n- *Tipo:* ${furniture}\n- *Acabado:* ${finish}\n- *Detalles/Medidas:* ${details || 'Sin especificar'}`;
+    
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  });
+</script>
