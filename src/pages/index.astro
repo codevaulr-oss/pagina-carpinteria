@@ -1,19 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Gallery from '../components/Gallery.astro';
-import QuoteBuilder from '../components/QuoteBuilder.astro';
+import Hero   from '../components/Hero.astro';
 ---
 
-<Layout title="Muebles Rústicos & Carpintería Artesanal">
+<Layout title="Inicio · Muebles Rústicos & Carpintería Artesanal">
   <Header />
-  <main>
+  <main class="pt-20">
     <Hero />
-    <Gallery />
-    <QuoteBuilder />
   </main>
-  <footer class="py-8 bg-stone-950 border-t border-stone-800 text-center text-stone-500 text-sm">
-    <p>© {new Date().getFullYear()} Muebles Rústicos. Todos los derechos reservados.</p>
-  </footer>
 </Layout>
