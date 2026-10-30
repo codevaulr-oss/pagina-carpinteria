@@ -1,5 +1,5 @@
 ---
-const phoneNumber = "525500000000"; 
+const phoneNumber = "525511749214";
 ---
 
 <section id="cotizador" class="py-24 bg-stone-950 border-t border-stone-800">
@@ -10,7 +10,19 @@ const phoneNumber = "525500000000";
         <p class="text-stone-400 text-sm mt-2">Selecciona las opciones para enviar tu solicitud directamente al taller.</p>
       </div>
 
+      <!-- Nota madera base -->
+      <div class="mb-8 flex items-start gap-3 bg-amber-950/40 border border-amber-700/30 rounded-2xl px-5 py-4">
+        <span class="text-2xl leading-none">🪵</span>
+        <div>
+          <p class="text-amber-400 font-bold text-sm">Material base: Pino sólido</p>
+          <p class="text-stone-400 text-xs mt-0.5 leading-relaxed">
+            La mayoría de nuestros muebles se fabrican en pino sólido de calidad. Si deseas otra madera (roble, nogal, cedro, etc.) el precio puede variar. Indícalo en el cotizador y te damos el ajuste.
+          </p>
+        </div>
+      </div>
+
       <form id="quoteForm" class="space-y-6">
+
         <div>
           <label class="block text-stone-300 font-semibold text-sm mb-2">Tipo de Mueble</label>
           <select id="furnitureType" class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500">
@@ -18,37 +30,60 @@ const phoneNumber = "525500000000";
             <option value="Cocina Integral">Cocina Integral</option>
             <option value="Recámara / Buroes">Recámara / Buroes</option>
             <option value="Closet / Mueble de guardado">Closet / Mueble de guardado</option>
+            <option value="Sala / Mesa de centro">Sala / Mesa de centro</option>
+            <option value="Librería / Estudio">Librería / Estudio</option>
             <option value="Otro proyecto a medida">Otro proyecto a medida</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-stone-300 font-semibold text-sm mb-2">Acabado / Tono de Madera Preferido</label>
+          <label class="block text-stone-300 font-semibold text-sm mb-2">
+            Tipo de Madera
+            <span class="ml-2 text-amber-500/70 font-normal text-xs">(Pino = precio base)</span>
+          </label>
+          <select id="woodType" class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500">
+            <option value="Pino sólido (precio base)">🪵 Pino sólido — precio base</option>
+            <option value="Roble / Encino">🌳 Roble / Encino — precio variable</option>
+            <option value="Nogal">🌰 Nogal — precio variable</option>
+            <option value="Cedro rojo">🌲 Cedro rojo — precio variable</option>
+            <option value="MDF con chapa natural">📦 MDF con chapa natural — precio variable</option>
+            <option value="No sé, quiero asesoría">❓ No sé, quiero asesoría</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-stone-300 font-semibold text-sm mb-2">Acabado / Tono Preferido</label>
           <select id="woodFinish" class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500">
-            <option value="Rústico Natural (Cera/Laca Mate)">Rústico Natural (Cera/Laca Mate)</option>
+            <option value="Rústico Natural (Cera/Laca Mate)">Rústico Natural — Cera / Laca Mate</option>
             <option value="Nogal Oscuro">Nogal Oscuro</option>
             <option value="Tono Olmo / Chocolate">Tono Olmo / Chocolate</option>
-            <option value="Estilo Industrial (Madera + Hierro)">Estilo Industrial (Madera + Hierro)</option>
+            <option value="Estilo Industrial (Madera + Hierro)">Estilo Industrial — Madera + Hierro</option>
+            <option value="Blanco Lavado / Decapado">Blanco Lavado / Decapado</option>
+            <option value="Pino Claro Natural">Pino Claro Natural</option>
           </select>
         </div>
 
         <div>
           <label class="block text-stone-300 font-semibold text-sm mb-2">Medidas Aproximadas o Detalles</label>
-          <textarea 
-            id="details" 
-            rows="3" 
-            placeholder="Ej: Mesa para 6 personas de 180cm x 90cm..." 
-            class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500"
+          <textarea
+            id="details"
+            rows="3"
+            placeholder="Ej: Mesa para 6 personas de 180cm x 90cm, con sillas incluidas..."
+            class="w-full bg-stone-800 border border-stone-700 rounded-xl p-3 text-stone-200 focus:outline-none focus:border-amber-500 resize-none"
           ></textarea>
         </div>
 
-        <button 
-          type="button" 
+        <button
+          type="button"
           id="sendBtn"
           class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
         >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a8.65 8.65 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          </svg>
           <span>Cotizar por WhatsApp</span>
         </button>
+
       </form>
     </div>
   </div>
@@ -57,11 +92,17 @@ const phoneNumber = "525500000000";
 <script is:inline define:vars={{ phoneNumber }}>
   document.getElementById('sendBtn')?.addEventListener('click', () => {
     const furniture = document.getElementById('furnitureType').value;
-    const finish = document.getElementById('woodFinish').value;
-    const details = document.getElementById('details').value;
+    const wood      = document.getElementById('woodType').value;
+    const finish    = document.getElementById('woodFinish').value;
+    const details   = document.getElementById('details').value;
 
-    const message = `¡Hola! Me gustaría cotizar un mueble con las siguientes características:\n\n- *Tipo:* ${furniture}\n- *Acabado:* ${finish}\n- *Detalles/Medidas:* ${details || 'Sin especificar'}`;
-    
+    const message =
+      `¡Hola! Me gustaría cotizar un mueble con las siguientes características:\n\n` +
+      `🪵 *Tipo de mueble:* ${furniture}\n` +
+      `🌳 *Madera:* ${wood}\n` +
+      `🎨 *Acabado:* ${finish}\n` +
+      `📐 *Detalles / Medidas:* ${details || 'Sin especificar aún'}`;
+
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   });

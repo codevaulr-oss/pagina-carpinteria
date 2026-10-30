@@ -1,53 +1,215 @@
 ---
+// Gallery.astro — sin imágenes, texturas CSS, animación al hacer scroll
 const projects = [
   {
-    title: "Comedor Rústico Roble",
+    title:    "Comedor Rústico Roble",
     category: "Comedores",
-    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80",
-    description: "Mesa de 8 sillas en madera sólida con acabado artesanal."
+    emoji:    "🪑",
+    theme:    "t-comedores",
+    desc:     "Mesa para 8 personas en madera sólida con acabado artesanal y banco corrido.",
+    tag:      "Popular",
   },
   {
-    title: "Cocina Integral Campestre",
+    title:    "Cocina Integral Campestre",
     category: "Cocinas",
-    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
-    description: "Gabinetes en madera rústica con barra desayunadora."
+    emoji:    "🍳",
+    theme:    "t-cocinas",
+    desc:     "Gabinetes en madera rústica con barra desayunadora y acabado mate.",
+    tag:      null,
   },
   {
-    title: "Cabecera y Buroes King Size",
+    title:    "Cabecera King Size",
     category: "Recámaras",
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
-    description: "Diseño ensamblado a mano con vetas naturales expuestas."
-  }
+    emoji:    "🛏️",
+    theme:    "t-recamaras",
+    desc:     "Diseño ensamblado a mano con vetas naturales expuestas. Incluye burós.",
+    tag:      "Nuevo",
+  },
+  {
+    title:    "Closet Vestidor",
+    category: "Closets",
+    emoji:    "🚪",
+    theme:    "t-closets",
+    desc:     "Sistema de puertas corredizas con cajones internos y espejo incluido.",
+    tag:      null,
+  },
+  {
+    title:    "Mesa Centro Industrial",
+    category: "Salas",
+    emoji:    "🛋️",
+    theme:    "t-salas",
+    desc:     "Madera con estructura de hierro negro. Estilo loft perfectamente equilibrado.",
+    tag:      null,
+  },
+  {
+    title:    "Librería a la Medida",
+    category: "Librería / Estudio",
+    emoji:    "📚",
+    theme:    "t-libreria",
+    desc:     "Estantes flotantes con módulos configurables hasta el techo.",
+    tag:      "Exclusivo",
+  },
 ];
 ---
 
-<section id="galeria" class="py-24 bg-stone-900 border-t border-stone-800">
+<section class="py-24 bg-stone-900 border-t border-stone-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
+
+    <!-- Header sección -->
+    <div class="text-center mb-14 reveal">
       <span class="text-amber-500 font-bold uppercase tracking-widest text-xs">Catálogo de Proyectos</span>
       <h2 class="text-3xl sm:text-5xl font-black text-stone-100 mt-2">Trabajos Recientes</h2>
-      <p class="text-stone-400 mt-4 max-w-xl mx-auto">Piezas fabricadas bajo las dimensiones y necesidades exactas del cliente.</p>
+      <p class="text-stone-400 mt-4 max-w-xl mx-auto leading-relaxed">
+        Piezas fabricadas bajo las dimensiones y necesidades exactas del cliente. Cada proyecto es único.
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      {projects.map(item => (
-        <div class="bg-stone-800 rounded-2xl overflow-hidden border border-stone-700/60 shadow-xl group hover:border-amber-600/50 transition-all">
-          <div class="relative overflow-hidden h-64">
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <span class="absolute top-4 right-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs px-3 py-1 rounded-full font-semibold border border-amber-500/20">
-              {item.category}
+    <!-- Filtros -->
+    <div class="flex flex-wrap gap-2 justify-center mb-10 reveal">
+      {['Todos','Comedores','Cocinas','Recámaras','Closets','Salas'].map(cat => (
+        <button
+          class="filter-btn px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide border transition-all"
+          data-cat={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div class="grid md:grid-cols-3 gap-6" id="galGrid">
+      {projects.map((p, i) => (
+        <article
+          class="gal-card reveal bg-stone-800 rounded-2xl overflow-hidden border border-stone-700/60 shadow-xl group"
+          data-cat={p.category}
+          style={`animation-delay: ${i * 0.08}s`}
+        >
+          <!-- Thumb sin imagen -->
+          <div class={`thumb ${p.theme} relative h-52 flex items-center justify-center overflow-hidden`}>
+            <span class="thumb-ico text-7xl filter drop-shadow-xl transition-transform duration-300 group-hover:scale-110">
+              {p.emoji}
             </span>
+            <span class="cat-badge absolute top-3 right-3 bg-stone-900/70 backdrop-blur text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/20">
+              {p.category}
+            </span>
+            {p.tag && (
+              <span class="tag-badge absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-black px-3 py-1 rounded-full">
+                {p.tag}
+              </span>
+            )}
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-stone-100 mb-2">{item.title}</h3>
-            <p class="text-stone-400 text-sm">{item.description}</p>
+
+          <!-- Info -->
+          <div class="p-5">
+            <h3 class="text-base font-bold text-stone-100 mb-1">{p.title}</h3>
+            <p class="text-stone-400 text-sm leading-relaxed mb-4">{p.desc}</p>
+            <a
+              href={`https://wa.me/525511749214?text=${encodeURIComponent(`Hola, me interesa cotizar: ${p.title}`)}`}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-emerald-400 text-xs font-bold border border-emerald-700/40 bg-emerald-950/40 px-3 py-1.5 rounded-lg hover:bg-emerald-900/50 transition-all"
+            >
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a8.65 8.65 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+              Cotizar este modelo
+            </a>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  /* ── Texturas CSS por categoría (sin imágenes) ── */
+  .t-comedores {
+    background:
+      linear-gradient(135deg, #3d2008, #6b3a12 45%, #4a2a0a),
+      repeating-linear-gradient(170deg, transparent, transparent 9px, rgba(255,200,100,.06) 9px, rgba(255,200,100,.06) 10px);
+  }
+  .t-cocinas {
+    background:
+      linear-gradient(135deg, #1e2a1e, #2d3d1a 45%, #1a2a18),
+      repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(80,160,50,.07) 12px, rgba(80,160,50,.07) 13px);
+  }
+  .t-recamaras {
+    background:
+      linear-gradient(135deg, #1a1530, #2a2045 45%, #1a1535),
+      repeating-linear-gradient(120deg, transparent, transparent 15px, rgba(150,120,255,.06) 15px, rgba(150,120,255,.06) 16px);
+  }
+  .t-closets {
+    background:
+      linear-gradient(135deg, #0f1a24, #1a2d38 45%, #0f1e28),
+      repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(80,160,220,.06) 8px, rgba(80,160,220,.06) 9px);
+  }
+  .t-salas {
+    background:
+      linear-gradient(135deg, #2a1a0f, #3d2810 45%, #2a1a0a),
+      repeating-linear-gradient(60deg, transparent, transparent 14px, rgba(255,180,60,.06) 14px, rgba(255,180,60,.06) 15px);
+  }
+  .t-libreria {
+    background:
+      linear-gradient(135deg, #1c1020, #2d1a38 45%, #1c1025),
+      repeating-linear-gradient(80deg, transparent, transparent 10px, rgba(200,100,255,.05) 10px, rgba(200,100,255,.05) 11px);
+  }
+
+  /* ── Cards ── */
+  .gal-card {
+    transition: transform .3s cubic-bezier(.25,.8,.25,1), border-color .3s, box-shadow .3s;
+  }
+  .gal-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(217,119,6,.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,.5);
+  }
+
+  /* ── Filtros ── */
+  .filter-btn {
+    color: #a8a29e; border-color: rgba(68,64,60,.6);
+    background: transparent;
+    cursor: pointer;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    color: #fff; background: #b45309; border-color: #b45309;
+  }
+
+  /* ── Animación reveal al scroll ── */
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; }
+  .reveal.visible { animation: revealUp .55s cubic-bezier(.25,.8,.25,1) both; }
+</style>
+
+<script>
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Filtros ──
+  const btns  = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.gal-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        const match = cat === 'Todos' || card.dataset.cat === cat;
+        card.style.display = match ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Activa "Todos" al cargar
+  document.querySelector<HTMLButtonElement>('.filter-btn[data-cat="Todos"]')?.click();
+</script>
